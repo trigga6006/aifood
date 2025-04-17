@@ -1,0 +1,22 @@
+# Python and Node.js ignores 
+# Ignore Visual Studio-specific folders
+.vs/
+*.user
+*.suo
+
+# Python environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv
+
+# Node modules (if using React)
+node_modules/
+dist/
+build/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
