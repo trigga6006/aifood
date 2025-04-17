@@ -48,6 +48,140 @@ except Exception as e:
 
 # API routes will be defined here
 
+# Add this to app.py after the "# API routes will be defined here" comment
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.json
+        
+        if not data or 'message' not in data:
+            return jsonify({'error': 'Message is required'}), 400
+        
+        user_message = data['message']
+        conversation_history = data.get('history', [])
+        
+        # Prepare messages for OpenAI API
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."}
+        ]
+        
+        # Add conversation history
+        for msg in conversation_history:
+            messages.append({"role": msg["role"], "content": msg["content"]})
+        
+        # Add the new user message
+        messages.append({"role": "user", "content": user_message})
+        
+        # Call OpenAI API
+        response = openai.ChatCompletion.create(
+            model=os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo'),
+            messages=messages,
+            max_tokens=int(os.getenv('MAX_TOKENS', 500)),
+            temperature=float(os.getenv('TEMPERATURE', 0.7))
+        )
+        
+        assistant_response = response.choices[0].message.content
+        
+        # Log the interaction
+        logger.info(f"User message: {user_message}")
+        logger.info(f"Assistant response: {assistant_response[:100]}...")  # Log first 100 chars
+        
+        return jsonify({
+            'response': assistant_response,
+            'usage': response.usage,
+            'timestamp': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+# Add this after the chat function
+
+@app.route('/api/upload', methods=['POST'])
+def upload_file():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+            
+        file = request.files['file']
+        
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+            
+        if blob_service_client is None or container_client is None:
+            return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
+            
+        # Generate a unique filename
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        unique_filename = f"{timestamp}_{file.filename}"
+        
+        # Upload file to Azure Blob Storage
+        blob_client = container_client.get_blob_client(unique_filename)
+        file_contents = file.read()
+        blob_client.upload_blob(file_contents, overwrite=True)
+        
+        # Get the URL of the uploaded file
+        file_url = f"{blob_client.url}"
+        
+        logger.info(f"File uploaded successfully: {unique_filename}")
+        
+        return jsonify({
+            'message': 'File uploaded successfully',
+            'filename': unique_filename,
+            'url': file_url
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in upload endpoint: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+# Add this after the upload_file function
+
+@app.route('/api/files', methods=['GET'])
+def list_files():
+    try:
+        if blob_service_client is None or container_client is None:
+            return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
+            
+        # List all blobs in the container
+        blobs = container_client.list_blobs()
+        files = []
+        
+        for blob in blobs:
+            blob_client = container_client.get_blob_client(blob.name)
+            files.append({
+                'name': blob.name,
+                'url': blob_client.url,
+                'size': blob.size,
+                'created': blob.creation_time.isoformat() if blob.creation_time else None,
+                'last_modified': blob.last_modified.isoformat() if blob.last_modified else None
+            })
+        
+        return jsonify({
+            'files': files,
+            'count': len(files)
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in list_files endpoint: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+# Add this after the list_files function
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    status = {
+        'status': 'ok',
+        'timestamp': datetime.now().isoformat(),
+        'services': {
+            'openai': 'connected' if openai.api_key else 'not configured',
+            'azure_storage': 'connected' if (blob_service_client and container_client) else 'not configured'
+        }
+    }
+    return jsonify(status)
+
 # Serve React frontend
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
