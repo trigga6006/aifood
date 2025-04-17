@@ -46,10 +46,17 @@ except Exception as e:
     blob_service_client = None
     container_client = None
 
-# API routes will be defined here
+# Helper functions
+def is_blob_storage_configured():
+    """Check if Azure Blob Storage is properly configured."""
+    return blob_service_client is not None and container_client is not None
 
-# Add this to app.py after the "# API routes will be defined here" comment
+def allowed_file(filename):
+    """Check if the file has an allowed extension."""
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# API routes
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
@@ -95,9 +102,7 @@ def chat():
         
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
-        return jsonify({'error': str(e)}), 500
-
-# Add this after the chat function
+        return jsonify({'error': 'An error occurred while processing your request.'}), 500
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
@@ -109,8 +114,11 @@ def upload_file():
         
         if file.filename == '':
             return jsonify({'error': 'No selected file'}), 400
+        
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'File type not allowed'}), 400
             
-        if blob_service_client is None or container_client is None:
+        if not is_blob_storage_configured():
             return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
             
         # Generate a unique filename
@@ -135,14 +143,12 @@ def upload_file():
         
     except Exception as e:
         logger.error(f"Error in upload endpoint: {str(e)}")
-        return jsonify({'error': str(e)}), 500
-
-# Add this after the upload_file function
+        return jsonify({'error': 'An error occurred while uploading the file.'}), 500
 
 @app.route('/api/files', methods=['GET'])
 def list_files():
     try:
-        if blob_service_client is None or container_client is None:
+        if not is_blob_storage_configured():
             return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
             
         # List all blobs in the container
@@ -166,9 +172,7 @@ def list_files():
         
     except Exception as e:
         logger.error(f"Error in list_files endpoint: {str(e)}")
-        return jsonify({'error': str(e)}), 500
-
-# Add this after the list_files function
+        return jsonify({'error': 'An error occurred while listing files.'}), 500
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -177,7 +181,7 @@ def health_check():
         'timestamp': datetime.now().isoformat(),
         'services': {
             'openai': 'connected' if openai.api_key else 'not configured',
-            'azure_storage': 'connected' if (blob_service_client and container_client) else 'not configured'
+            'azure_storage': 'connected' if is_blob_storage_configured() else 'not configured'
         }
     }
     return jsonify(status)
