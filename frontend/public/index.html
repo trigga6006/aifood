@@ -1,1 +1,1844 @@
-#index for Q
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XXXX - Restaurant AI Platform</title>
+    <style>
+        :root {
+            --primary-color: #c0392b; /* Refined burgundy red */
+            --secondary-color: #34495e; /* Deep slate blue */
+            --accent-color: #d4b996; /* Sophisticated gold/brass */
+            --background-color: #0a0a0a; /* Rich matte black */
+            --card-background: #181818; /* Slightly lighter than background */
+            --text-color: #f5f5f5; /* Crisp white for text */
+            --text-muted: #adb5bd; /* Soft silver for secondary text */
+            --border-color: #2c2c2c; /* Refined border color */
+            --highlight-color: #e67e22; /* Subtle accent for highlights */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: rgba(25, 25, 25, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #a6311f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.2);
+        }
+        
+        .hero {
+            padding: 6rem 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            filter: grayscale(100%);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+        }
+        
+        .steps {
+            padding: 6rem 0;
+            background-color: #161616;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .step-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-size: 1.3rem;
+        }
+        
+        .step-card p {
+            color: var(--text-muted);
+        }
+        
+        .features {
+            padding: 6rem 0;
+            background-color: var(--background-color);
+            position: relative;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 10px;
+            margin-right: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(52, 73, 94, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-size: 1.3rem;
+        }
+        
+        .feature-content p {
+            color: var(--text-muted);
+        }
+        
+        .testimonials {
+            padding: 6rem 0;
+            background-color: #161616;
+        }
+        
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            background-color: #333;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--text-color);
+        }
+        
+        .author-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .pricing {
+            padding: 6rem 0;
+            background-color: var(--background-color);
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pricing-card.featured::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .pricing-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+        }
+        
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #922b21 100%);
+            color: var(--text-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            filter: grayscale(100%);
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+        
+        .cta-btn {
+            background-color: var(--text-color);
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .cta-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section {
+            padding: 6rem 0;
+            background-color: #161616;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #242424;
+            color: var(--text-color);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(212, 185, 150, 0.15);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #a6311f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.2);
+        }
+        
+        .footer {
+            background-color: #121212;
+            color: var(--text-color);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Tab system */
+        .tab {
+            display: none;
+        }
+        
+        .tab.active {
+            display: block;
+        }
+        
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-link {
+            padding: 0.8rem 1.5rem;
+            background-color: #242424;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+        
+        .tab-link.active {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+        
+        .tab-link:hover:not(.active) {
+            background-color: #333;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 2px;
+            width: 100%;
+            background-color: #333;
+            z-index: 0;
+        }
+        
+        .step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .step.active {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.15);
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 0.7rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            color: var(--text-muted);
+        }
+        
+        /* Nav buttons */
+        .form-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+        }
+        
+        .prev-btn {
+            background-color: #333;
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .prev-btn:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+        
+        /* Drag and drop */
+        .drag-area {
+            border: 2px dashed #333;
+            border-radius: 4px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+            background-color: #1f1f1f;
+        }
+        
+        .drag-area.active {
+            border-color: var(--primary-color);
+            background-color: rgba(214, 69, 69, 0.05);
+        }
+        
+        .drag-area p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .browse-btn {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .browse-btn:hover {
+            color: #c03c3c;
+            text-decoration: underline;
+        }
+        
+        /* Menu builder */
+        .menu-builder {
+            margin-bottom: 2.5rem;
+        }
+        
+        .menu-category {
+            background-color: #1f1f1f;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .add-item-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .add-item-btn:hover {
+            background-color: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(52, 73, 94, 0.2);
+        }
+        
+        .menu-item {
+            background-color: #242424;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+        }
+        
+        .add-category-btn {
+            display: block;
+            width: 100%;
+            background-color: #242424;
+            border: 1px dashed #444;
+            padding: 1.2rem;
+            border-radius: 4px;
+            text-align: center;
+            color: var(--text-color);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .add-category-btn:hover {
+            background-color: #333;
+            border-color: var(--secondary-color);
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+        
+        .tooltip-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #333;
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 18px;
+            cursor: pointer;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #333;
+            color: var(--text-color);
+            text-align: center;
+            border-radius: 4px;
+            padding: 0.7rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 1rem;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #484848;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Enhanced responsive design */
+        @media (max-width: 991px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .steps, .features, .testimonials, .pricing, .form-section {
+                padding: 4rem 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 0.5rem 1rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .step-cards, .features-grid, .testimonial-cards, .pricing-cards {
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Subtle texture overlay for restaurant aesthetic */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544v2.83L25.456 30l-1.414 1.414-28-28L0 0h.284zM0 5.373l25.456 25.455-1.414 1.415L0 8.2v2.83l21.627 21.626-1.414 1.414L0 13.657v2.828l17.8 17.8-1.414 1.414L0 19.1v2.83l14.142 14.14-1.414 1.415L0 24.544V60h60V0H0v5.374z' fill='%23d4b996' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">X<span style="color: var(--accent-color);">XXX</span></a>
+                <ul class="nav-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#form-section" class="btn">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Transforming Restaurant Experiences Through Intelligent Automation</h1>
+                    <p>Our AI-powered platform elegantly manages guest interactions, reservations, and orders, allowing your team to focus on what matters most—creating memorable culinary experiences.</p>
+                    <a href="#form-section" class="btn">Begin Your Journey</a>
+                </div>
+                <div class="hero-image">
+                    <img src="/api/placeholder/600/400" alt="Elegant restaurant interface">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps">
+        <div class="container">
+            <div class="section-title">
+                <h2>A Refined Three-Step Process</h2>
+                <p>Seamlessly integrate our platform into your restaurant's workflow</p>
+            </div>
+            <div class="step-cards">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Create Your Establishment Profile</h3>
+                    <p>Begin with your restaurant's foundation—enter your core details and brand identity to establish a personalized platform.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Curate Your Menu & Services</h3>
+                    <p>Input your culinary offerings, operating hours, and house specialties to ensure your digital presence reflects your establishment's essence.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Launch</h3>
+                    <p>Integrate your platform across all guest touchpoints—website, social media, and messaging apps—creating a unified guest communication system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sophisticated Features for Modern Hospitality</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h3>Intelligent Reservation System</h3>
+                        <p>Effortlessly manage bookings with an intuitive calendar that optimizes seating arrangements and handles special requests with precision.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🍷</div>
+                    <div class="feature-content">
+                        <h3>Digital Order Management</h3>
+                        <p>Streamline the ordering process with a system that integrates seamlessly with your kitchen operations and POS environment.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">❓</div>
+                    <div class="feature-content">
+                        <h3>Guest Inquiry Response</h3>
+                        <p>Provide immediate answers to guest questions about menu options, ingredients, special events, and operational details.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h3>Insights Dashboard</h3>
+                        <p>Gain valuable perspectives on guest preferences, peak interaction times, and trending inquiries to refine your hospitality approach.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-content">
+                        <h3>Omnichannel Presence</h3>
+                        <p>Maintain consistent guest engagement across your website, social media platforms, and popular messaging applications.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-content">
+                        <h3>Adaptive Intelligence</h3>
+                        <p>Watch your system evolve through continuous learning from guest interactions, becoming increasingly tailored to your establishment's unique character.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Voices from the Culinary Community</h2>
+            </div>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Since implementing this platform, our response time dropped from hours to minutes. It effortlessly handles guest inquiries and manages reservations with remarkable precision, allowing our staff to focus entirely on creating exceptional dining experiences."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="/api/placeholder/50/50" alt="Restaurant proprietor">
+                        </div>
+                        <div class="author-info">
+                            <h4>Alexandra Chen</h4>
+                            <p>Proprietor, Lumière Bistro</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "We've witnessed a 30% increase in online reservations since adopting the platform. The system's intuitive design has transformed how we interact with guests, eliminating repetitive inquiries and elevating our overall service approach."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="/api/placeholder/50/50" alt="Restaurant director">
+                        </div>
+                        <div class="author-info">
+                            <h4>Marcus Ellison</h4>
+                            <p>Director, Terroir Collective</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Our patrons consistently praise the immediate responses they receive. The platform has redefined convenience—whether booking tables, checking menu details, or inquiring about special dietary accommodations—everything is handled with exceptional elegance."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="/api/placeholder/50/50" alt="Executive chef">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sophia Mendez</h4>
+                            <p>Executive Chef, Ember & Salt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Transparent Investment Options</h2>
+                <p>Select the tier that complements your establishment's needs</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-name">Essential</div>
+                    <div class="pricing-price">$29<span>/month</span></div>
+                    <p>Tailored for intimate cafés and boutique eateries</p>
+                    <ul class="pricing-features">
+                        <li>Foundational platform capabilities</li>
+                        <li>Website integration</li>
+                        <li>Guest inquiry management</li>
+                        <li>Up to 500 interactions monthly</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#form-section" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-name">Professional</div>
+                    <div class="pricing-price">$79<span>/month</span></div>
+                    <p>Designed for established dining destinations</p>
+                    <ul class="pricing-features">
+                        <li>Advanced intelligence features</li>
+                        <li>Website & social media integration</li>
+                        <li>Comprehensive reservation system</li>
+                        <li>Order processing capabilities</li>
+                        <li>Up to 2,000 interactions monthly</li>
+                        <li>Priority support services</li>
+                    </ul>
+                    <a href="#form-section" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-price">$199<span>/month</span></div>
+                    <p>Crafted for restaurant groups and premier venues</p>
+                    <ul class="pricing-features">
+                        <li>Complete platform ecosystem</li>
+                        <li>Omnichannel integration</li>
+                        <li>Bespoke branding options</li>
+                        <li>POS system compatibility</li>
+                        <li>Unlimited guest interactions</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Personal account strategist</li>
+                    </ul>
+                    <a href="#form-section" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Configure Your Hospitality Platform</h2>
+            </div>
+            <div class="form-container">
+                <div class="progress-steps">
+                    <div class="step active">
+                        1
+                        <span class="step-label">Establishment Details</span>
+                    </div>
+                    <div class="step">
+                        2
+                        <span class="step-label">Menu</span>
+                    </div>
+                    <div class="step">
+                        3
+                        <span class="step-label">Hours & Location</span>
+                    </div>
+                    <div class="step">
+                        4
+                        <span class="step-label">Guest FAQs</span>
+                    </div>
+                    <div class="step">
+                        5
+                        <span class="step-label">Finalize</span>
+                    </div>
+                </div>
+                
+                <form id="setup-form">
+                    <!-- Tab 1: Basic Info -->
+                    <div class="tab active" id="tab-1">
+                        <h3>Establishment Foundation</h3>
+                        <p>Let's begin with the essential details about your restaurant.</p>
+                        
+                        <div class="form-group">
+                            <label for="restaurant-name">Establishment Name</label>
+                            <input type="text" id="restaurant-name" class="form-control" placeholder="Enter your restaurant's name">
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="restaurant-type">Establishment Type</label>
+                                <select id="restaurant-type" class="form-control">
+                                    <option value="">Select establishment type</option>
+                                    <option value="fine-dining">Fine Dining</option>
+                                    <option value="casual">Casual Dining</option>
+                                    <option value="fast-casual">Fast Casual</option>
+                                    <option value="cafe">Café</option>
+                                    <option value="bistro">Bistro</option>
+                                    <option value="gastropub">Gastropub</option>
+                                    <option value="wine-bar">Wine Bar</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cuisine">Culinary Focus</label>
+                                <select id="cuisine" class="form-control">
+                                    <option value="">Select primary cuisine</option>
+                                    <option value="italian">Italian</option>
+                                    <option value="mediterranean">Mediterranean</option>
+                                    <option value="french">French</option>
+                                    <option value="asian-fusion">Asian Fusion</option>
+                                    <option value="modern-american">Modern American</option>
+                                    <option value="latin-american">Latin American</option>
+                                    <option value="seafood">Seafood</option>
+                                    <option value="farm-to-table">Farm-to-Table</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Establishment Narrative</label>
+                            <textarea id="description" class="form-control" rows="4" placeholder="Share your establishment's story, atmosphere, and culinary philosophy"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="logo-upload">Brand Identity</label>
+                            <div class="drag-area">
+                                <p>Drag & drop your logo here or <span class="browse-btn">select file</span></p>
+                                <small>Recommended size: 400x400px. Maximum file size: 2MB.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-nav">
+                            <div></div> <!-- Empty div for spacing -->
+                            <button type="button" class="submit-btn" onclick="nextTab(1, 2)">Continue</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 2: Menu -->
+                    <div class="tab" id="tab-2">
+                        <h3>Culinary Offerings</h3>
+                        <p>Detail your menu items and categories to help guests explore your cuisine.</p>
+                        
+                        <div class="menu-builder">
+                            <div class="menu-category">
+                                <div class="category-header">
+                                    <input type="text" class="form-control" placeholder="Category Name (e.g., Appetizers, Small Plates)">
+                                    <button type="button" class="add-item-btn">+ Add Item</button>
+                                </div>
+                                
+                                <div class="menu-item">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>Item Name</label>
+                                            <input type="text" class="form-control" placeholder="Dish name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="text" class="form-control" placeholder="$0.00">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" rows="2" placeholder="Describe ingredients, preparation method, and presentation"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Dietary Considerations</label>
+                                        <div>
+                                            <label><input type="checkbox"> Vegetarian</label>
+                                            <label><input type="checkbox"> Vegan</label>
+                                            <label><input type="checkbox"> Gluten-Free</label>
+                                            <label><input type="checkbox"> Dairy-Free</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="add-category-btn">+ Add New Category</button>
+                            
+                            <div class="form-group">
+                                <label>Menu Import (Optional)</label>
+                                <div class="drag-area">
+                                    <p>Already have a menu document? Drag & drop it here or <span class="browse-btn">select file</span></p>
+                                    <small>Accepted formats: PDF, DOCX, XLSX, CSV</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-nav">
+                            <button type="button" class="prev-btn" onclick="prevTab(2, 1)">Previous</button>
+                            <button type="button" class="submit-btn" onclick="nextTab(2, 3)">Continue</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 3: Hours & Location -->
+                    <div class="tab" id="tab-3">
+                        <h3>Hours & Location</h3>
+                        <p>Specify when and where guests can enjoy your culinary offerings.</p>
+                        
+                        <div class="form-group">
+                            <label>Operating Hours</label>
+                            <div class="form-grid">
+                                <div>
+                                    <label>Monday</label>
+                                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                        <select class="form-control" style="width: 45%;">
+                                            <option value="Closed">Closed</option>
+                                            <option value="9:00 AM">9:00 AM</option>
+                                            <option value="10:00 AM">10:00 AM</option>
+                                            <option value="11:00 AM">11:00 AM</option>
+                                            <option value="12:00 PM">12:00 PM</option>
+                                            <option value="2:00 PM">2:00 PM</option>
+                                            <option value="4:00 PM">4:00 PM</option>
+                                            <option value="5:00 PM">5:00 PM</option>
+                                        </select>
+                                        <span style="margin: 0 10px;">to</span>
+                                        <select class="form-control" style="width: 45%;">
+                                            <option value="Closed">Closed</option>
+                                            <option value="5:00 PM">5:00 PM</option>
+                                            <option value="6:00 PM">6:00 PM</option>
+                                            <option value="8:00 PM">8:00 PM</option>
+                                            <option value="9:00 PM">9:00 PM</option>
+                                            <option value="10:00 PM">10:00 PM</option>
+                                            <option value="11:00 PM">11:00 PM</option>
+                                            <option value="12:00 AM">12:00 AM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label>Tuesday</label>
+                                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                        <select class="form-control" style="width: 45%;">
+                                            <option value="Closed">Closed</option>
+                                            <option value="9:00 AM">9:00 AM</option>
+                                            <option value="10:00 AM">10:00 AM</option>
+                                            <option value="11:00 AM">11:00 AM</option>
+                                            <option value="12:00 PM">12:00 PM</option>
+                                            <option value="2:00 PM">2:00 PM</option>
+                                            <option value="4:00 PM">4:00 PM</option>
+                                            <option value="5:00 PM">5:00 PM</option>
+                                        </select>
+                                        <span style="margin: 0 10px;">to</span>
+                                        <select class="form-control" style="width: 45%;">
+                                            <option value="Closed">Closed</option>
+                                            <option value="5:00 PM">5:00 PM</option>
+                                            <option value="6:00 PM">6:00 PM</option>
+                                            <option value="8:00 PM">8:00 PM</option>
+                                            <option value="9:00 PM">9:00 PM</option>
+                                            <option value="10:00 PM">10:00 PM</option>
+                                            <option value="11:00 PM">11:00 PM</option>
+                                            <option value="12:00 AM">12:00 AM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Other days would follow the same pattern -->
+                            <div class="form-group">
+                                <button type="button" class="btn" style="background-color: #333; color: var(--text-color);">
+                                    + Add Special Hours (Seasonal, Holiday)
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Establishment Location</label>
+                            <input type="text" class="form-control" placeholder="Street Address" style="margin-bottom: 0.5rem;">
+                            <div class="form-grid">
+                                <input type="text" class="form-control" placeholder="City">
+                                <input type="text" class="form-control" placeholder="State/Province">
+                            </div>
+                            <div class="form-grid" style="margin-top: 0.5rem;">
+                                <input type="text" class="form-control" placeholder="Postal/Zip Code">
+                                <input type="text" class="form-control" placeholder="Country">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Contact Information</label>
+                            <input type="tel" class="form-control" placeholder="Phone Number" style="margin-bottom: 0.5rem;">
+                            <input type="email" class="form-control" placeholder="Email Address">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Digital Presence</label>
+                            <input type="url" class="form-control" placeholder="Website URL" style="margin-bottom: 0.5rem;">
+                            <div class="form-grid">
+                                <input type="url" class="form-control" placeholder="Instagram URL">
+                                <input type="url" class="form-control" placeholder="Facebook URL">
+                            </div>
+                        </div>
+                        
+                        <div class="form-nav">
+                            <button type="button" class="prev-btn" onclick="prevTab(3, 2)">Previous</button>
+                            <button type="button" class="submit-btn" onclick="nextTab(3, 4)">Continue</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 4: FAQs -->
+                    <div class="tab" id="tab-4">
+                        <h3>Guest Information</h3>
+                        <p>Anticipate guest inquiries with thorough, informative responses.</p>
+                        
+                        <div class="form-group">
+                            <p>These suggested categories cover common guest questions. Customize responses to reflect your establishment's policies and offerings.</p>
+                        </div>
+                        
+                        <div class="menu-category" style="margin-bottom: 1.5rem;">
+                            <div class="category-header">
+                                <h4>Reservation Policies</h4>
+                                <button type="button" class="add-item-btn">+ Add Question</button>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="What is your reservation policy?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Detail your reservation process, cancellation policy, and any deposit requirements"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="Do you accommodate large groups?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Explain your policies for larger parties, private dining options, and any special menus available"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-category" style="margin-bottom: 1.5rem;">
+                            <div class="category-header">
+                                <h4>Dietary Accommodations</h4>
+                                <button type="button" class="add-item-btn">+ Add Question</button>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="Can you accommodate special dietary requirements?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Describe how your kitchen handles allergies, restrictions, and special dietary needs"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="Do you offer vegetarian/vegan options?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Detail your plant-based offerings and flexibility in modifying dishes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-category">
+                            <div class="category-header">
+                                <h4>Experience Details</h4>
+                                <button type="button" class="add-item-btn">+ Add Question</button>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="What is your dress code?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Explain your establishment's attire expectations"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" value="Is there parking available?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <textarea class="form-control" rows="2" placeholder="Provide details about parking options, valet services, or nearby public transportation"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-category-btn">+ Add New FAQ Category</button>
+                        
+                        <div class="form-nav">
+                            <button type="button" class="prev-btn" onclick="prevTab(4, 3)">Previous</button>
+                            <button type="button" class="submit-btn" onclick="nextTab(4, 5)">Continue</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 5: Finish -->
+                    <div class="tab" id="tab-5">
+                        <h3>Platform Customization</h3>
+                        <p>Finalize the details of your digital hospitality assistant.</p>
+                        
+                        <div class="form-group">
+                            <label>Assistant Name</label>
+                            <input type="text" class="form-control" placeholder="e.g., Maître D, Concierge, Host">
+                            <small>This name will appear during guest interactions.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Welcome Message</label>
+                            <textarea class="form-control" rows="2" placeholder="e.g., Welcome to [Establishment Name]. How may I assist with your dining experience today?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tone & Style</label>
+                            <select class="form-control">
+                                <option value="elegant">Elegant & Refined</option>
+                                <option value="warm">Warm & Inviting</option>
+                                <option value="professional">Professional & Precise</option>
+                                <option value="casual">Casual & Approachable</option>
+                                <option value="distinctive">Distinctive & Characterful</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Communication Channels</label>
+                            <div>
+                                <label><input type="checkbox" checked> Website Integration</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-text">Connects to popular messaging services for guest communication</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox"> Social Media Integration</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Handles inquiries through your social media accounts</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox"> Voice Assistant</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Enables voice interactions for phone inquiries</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Advanced Features</label>
+                            <div>
+                                <label><input type="checkbox" checked> Reservation Management</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Allow guests to book tables directly through the platform</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox" checked> Order Processing</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Enable food orders through your digital channels</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox"> Guest Feedback Collection</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Gather insights and reviews after dining experiences</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox"> Promotional Communications</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip-text">Send curated offers and event announcements to guests</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Human Handover</label>
+                            <div style="display: flex; align-items: center;">
+                                <span>Enable live staff intervention when needed</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Staff notification email for handover requests" style="margin-top: 0.5rem;">
+                        </div>
+                        
+                        <div class="form-nav">
+                            <button type="button" class="prev-btn" onclick="prevTab(5, 4)">Previous</button>
+                            <button type="submit" class="submit-btn">Launch Platform</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Elevate Your Guest Experience Today</h2>
+            <p>Join prestigious establishments worldwide that are transforming their hospitality approach, increasing reservations, and creating memorable dining experiences with our intelligent platform.</p>
+            <a href="#form-section" class="cta-btn">Begin Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">X<span style="color: var(--accent-color);">XXX</span></div>
+                    <p>The sophisticated digital assistant for modern dining establishments. Elevate guest experiences through intelligent automation and personalized service.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Platform</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Demo</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Center</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Industry Insights</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 XXXX. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to handle tab navigation
+        function nextTab(currentTab, nextTab) {
+            // Hide current tab
+            document.getElementById('tab-' + currentTab).classList.remove('active');
+            // Show next tab
+            document.getElementById('tab-' + nextTab).classList.add('active');
+            // Update progress steps
+            updateProgressSteps(nextTab);
+        }
+        
+        function prevTab(currentTab, prevTab) {
+            // Hide current tab
+            document.getElementById('tab-' + currentTab).classList.remove('active');
+            // Show previous tab
+            document.getElementById('tab-' + prevTab).classList.add('active');
+            // Update progress steps
+            updateProgressSteps(prevTab);
+        }
+        
+        function updateProgressSteps(activeTab) {
+            // Get all steps
+            const steps = document.querySelectorAll('.progress-steps .step');
+            // Reset all steps
+            steps.forEach((step, index) => {
+                if (index + 1 <= activeTab) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+        
+        // Initialize drag and drop functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dragAreas = document.querySelectorAll('.drag-area');
+            
+            dragAreas.forEach(dragArea => {
+                dragArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('active');
+                });
+                
+                dragArea.addEventListener('dragleave', function() {
+                    this.classList.remove('active');
+                });
+                
+                dragArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('active');
+                    // Handle file upload logic here
+                });
+                
+                // Handle browse button click
+                const browseBtn = dragArea.querySelector('.browse-btn');
+                if (browseBtn) {
+                    browseBtn.addEventListener('click', function() {
+                        // Simulate file input click
+                        const fileInput = document.createElement('input');
+                        fileInput.type = 'file';
+                        fileInput.click();
+                        
+                        fileInput.addEventListener('change', function() {
+                            // Handle file selection logic here
+                        });
+                    });
+                }
+            });
+            
+            // Add Category Button functionality
+            const addCategoryBtn = document.querySelector('.add-category-btn');
+            if (addCategoryBtn) {
+                addCategoryBtn.addEventListener('click', function() {
+                    // Add new category logic here
+                    const menuBuilder = document.querySelector('.menu-builder');
+                    const newCategory = document.createElement('div');
+                    newCategory.className = 'menu-category';
+                    newCategory.innerHTML = `
+                        <div class="category-header">
+                            <input type="text" class="form-control" placeholder="Category Name">
+                            <button type="button" class="add-item-btn">+ Add Item</button>
+                        </div>
+                    `;
+                    
+                    if (menuBuilder) {
+                        menuBuilder.insertBefore(newCategory, addCategoryBtn);
+                        
+                        // Add event listener to the new Add Item button
+                        const newAddItemBtn = newCategory.querySelector('.add-item-btn');
+                        newAddItemBtn.addEventListener('click', function() {
+                            addMenuItem(newCategory);
+                        });
+                    }
+                });
+            }
+            
+            // Add Item Button functionality
+            const addItemBtns = document.querySelectorAll('.add-item-btn');
+            addItemBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.closest('.menu-category');
+                    addMenuItem(category);
+                });
+            });
+            
+            function addMenuItem(category) {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input type="text" class="form-control" placeholder="Item name">
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" class="form-control" placeholder="$0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="2" placeholder="Item description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Dietary Options</label>
+                        <div>
+                            <label><input type="checkbox"> Vegetarian</label>
+                            <label><input type="checkbox"> Vegan</label>
+                            <label><input type="checkbox"> Gluten-Free</label>
+                            <label><input type="checkbox"> Dairy-Free</label>
+                        </div>
+                    </div>
+                `;
+                category.appendChild(menuItem);
+            }
+        });
+    </script>
+</body>
+</html>
+                                    <span class="tooltip-text">Embeds an elegant interaction widget on your website</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label><input type="checkbox"> Messaging Platforms</label>
+                                <div class="tooltip">
+                                    <span class="tooltip-icon">?</span>
