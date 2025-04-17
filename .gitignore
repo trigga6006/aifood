@@ -12,6 +12,11 @@ __pycache__/
 *.env
 *.venv
 
+# Chat Suggestion - For ignoring env and venv folders as well
+.env/
+.venv/
+
+
 # Node modules (if using React)
 node_modules/
 dist/
