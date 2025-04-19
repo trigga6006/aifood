@@ -2,7 +2,6 @@
 flask==2.3.3
 flask-cors==4.0.0
 Werkzeug==2.3.7
-gunicorn==21.2.0
 
 # API Integration
 openai==0.28.0
@@ -10,25 +9,10 @@ requests==2.31.0
 
 # Azure Storage
 azure-storage-blob==12.17.0
-azure-identity==1.14.0
-
-# Database
-SQLAlchemy==2.0.20
-alembic==1.12.0
-psycopg2-binary==2.9.7  # For PostgreSQL
-
-# Authentication & Security
-pyjwt==2.8.0
-bcrypt==4.0.1
-cryptography==41.0.3
 
 # Utilities
 python-dotenv==1.0.0
-pydantic==2.3.0
-jsonschema==4.19.0
-marshmallow==3.20.1
 
 # Testing
 pytest==7.4.2
 pytest-flask==1.2.0
-responses==0.23.3  # For mocking API responses
