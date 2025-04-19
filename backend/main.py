@@ -169,8 +169,8 @@ def handle_api_error(error):
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Configure Azure Blob Storage
-azure_connection_string = os.getenv('DefaultEndpointsProtocol=https;AccountName=nomicloudoi;AccountKey=USTsL5STbX6hSszz9snq6pzJegOQU0hF1fBx8tXLOuWro8TaoJg8MxUYAU2Er/4C+VSwJFW55YhD+AStytBuQg==;EndpointSuffix=core.windows.net')
-azure_container_name = os.getenv('aifood-files')
+azure_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+azure_container_name = os.getenv('AZURE_STORAGE_CONTAINER_NAME')
 
 # Initialize Azure Blob Storage service
 blob_service_client = None
