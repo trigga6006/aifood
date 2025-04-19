@@ -2,6 +2,11 @@
 # app.py
 
 # Dependencies
+import re
+from datetime import datetime, timedelta
+from flask import Flask, request, jsonify, send_from_directory, Response
+from azure.storage.blob import BlobServiceClient, ContentSettings, generate_blob_sas, BlobSasPermissions
+from azure.core.exceptions import ResourceNotFoundError
 import os
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
@@ -10,6 +15,7 @@ import openai
 from azure.storage.blob import BlobServiceClient
 import logging
 from datetime import datetime
+from services.azure_storage import AzureStorageService
 
 #For error handling
 from werkzeug.exceptions import HTTPException
@@ -163,76 +169,107 @@ def handle_api_error(error):
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Configure Azure Blob Storage
-azure_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-azure_container_name = os.getenv('AZURE_STORAGE_CONTAINER_NAME')
+azure_connection_string = os.getenv('DefaultEndpointsProtocol=https;AccountName=nomicloudoi;AccountKey=USTsL5STbX6hSszz9snq6pzJegOQU0hF1fBx8tXLOuWro8TaoJg8MxUYAU2Er/4C+VSwJFW55YhD+AStytBuQg==;EndpointSuffix=core.windows.net')
+azure_container_name = os.getenv('aifood-files')
 
-# Initialize Azure Blob Storage client
-try:
-    blob_service_client = BlobServiceClient.from_connection_string(azure_connection_string)
-    container_client = blob_service_client.get_container_client(azure_container_name)
-    logger.info("Successfully connected to Azure Blob Storage")
-except Exception as e:
-    logger.error(f"Failed to connect to Azure Blob Storage: {str(e)}")
-    blob_service_client = None
-    container_client = None
+# Initialize Azure Blob Storage service
+blob_service_client = None
+container_client = None
 
-# Helper functions
-def is_blob_storage_configured():
-    """Check if Azure Blob Storage is properly configured."""
-    return blob_service_client is not None and container_client is not None
-
-def allowed_file(filename):
-    """Check if the file has an allowed extension."""
-    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-# API routes
-@app.route('/api/chat', methods=['POST'])
-def chat():
+def initialize_azure_storage():
+    """Initialize Azure Blob Storage client with proper error handling."""
+    global blob_service_client, container_client
+    
+    if not azure_connection_string or not azure_container_name:
+        logger.warning("Azure Blob Storage configuration missing. File storage features disabled.")
+        return False
+    
     try:
-        data = request.json
+        # Create the blob service client
+        blob_service_client = BlobServiceClient.from_connection_string(azure_connection_string)
         
-        if not data or 'message' not in data:
-            return jsonify({'error': 'Message is required'}), 400
+        # Check if container exists, create if it doesn't
+        container_client = blob_service_client.get_container_client(azure_container_name)
         
-        user_message = data['message']
-        conversation_history = data.get('history', [])
+        # Verify connection by listing blobs (will raise error if container doesn't exist)
+        next(container_client.list_blobs(), None)
         
-        # Prepare messages for OpenAI API
-        messages = [
-            {"role": "system", "content": "You are a helpful assistant."}
-        ]
+        logger.info(f"Successfully connected to Azure Blob Storage container: {azure_container_name}")
+        return True
+    except ResourceNotFoundError:
+        # Container doesn't exist, create it
+        try:
+            logger.info(f"Container {azure_container_name} not found. Creating now...")
+            container_client = blob_service_client.create_container_client(azure_container_name)
+            container_client.create_container()
+            logger.info(f"Container {azure_container_name} created successfully")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to create container: {str(e)}")
+            blob_service_client = None
+            container_client = None
+            return False
+    except Exception as e:
+        logger.error(f"Failed to connect to Azure Blob Storage: {str(e)}")
+        blob_service_client = None
+        container_client = None
+        return False
+
+# Initialize Azure storage on app startup
+azure_storage_available = initialize_azure_storage()
+
+def is_blob_storage_configured():
+    """Check if Azure Blob Storage is properly configured and connected."""
+    return azure_storage_available and blob_service_client is not None and container_client is not None
+
+def get_secure_file_url(blob_name, expiry_hours=1):
+    """Generate a secure, time-limited SAS URL for accessing a blob."""
+    if not is_blob_storage_configured():
+        return None
+    
+    try:
+        # Generate a SAS token with expiration
+        from datetime import datetime, timedelta
+        from azure.storage.blob import generate_blob_sas, BlobSasPermissions
         
-        # Add conversation history
-        for msg in conversation_history:
-            messages.append({"role": msg["role"], "content": msg["content"]})
+        # Get account information from connection string
+        account_name = blob_service_client.account_name
+        account_key = blob_service_client.credential.account_key
         
-        # Add the new user message
-        messages.append({"role": "user", "content": user_message})
-        
-        # Call OpenAI API
-        response = openai.ChatCompletion.create(
-            model=os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo'),
-            messages=messages,
-            max_tokens=int(os.getenv('MAX_TOKENS', 500)),
-            temperature=float(os.getenv('TEMPERATURE', 0.7))
+        # Generate SAS token with read permission
+        sas_token = generate_blob_sas(
+            account_name=account_name,
+            container_name=azure_container_name,
+            blob_name=blob_name,
+            account_key=account_key,
+            permission=BlobSasPermissions(read=True),
+            expiry=datetime.utcnow() + timedelta(hours=expiry_hours)
         )
         
-        assistant_response = response.choices[0].message.content
+        # Construct the full URL with SAS token
+        blob_client = container_client.get_blob_client(blob_name)
+        sas_url = f"{blob_client.url}?{sas_token}"
         
-        # Log the interaction
-        logger.info(f"User message: {user_message}")
-        logger.info(f"Assistant response: {assistant_response[:100]}...")  # Log first 100 chars
-        
-        return jsonify({
-            'response': assistant_response,
-            'usage': response.usage,
-            'timestamp': datetime.now().isoformat()
-        })
-        
+        return sas_url
     except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}")
-        return jsonify({'error': 'An error occurred while processing your request.'}), 500
+        logger.error(f"Error generating secure URL for blob {blob_name}: {str(e)}")
+        return None
+
+def allowed_file(filename):
+    """Check if the file has an allowed extension for security."""
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx', 'xlsx', 'pptx'}
+    if '.' not in filename:
+        return False
+    extension = filename.rsplit('.', 1)[1].lower()
+    return extension in ALLOWED_EXTENSIONS
+
+def sanitize_filename(filename):
+    """Sanitize filename to prevent path traversal attacks."""
+    # Remove any directory path components
+    filename = os.path.basename(filename)
+    # Replace potentially dangerous characters
+    filename = re.sub(r'[^a-zA-Z0-9_.-]', '_', filename)
+    return filename
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
@@ -249,26 +286,49 @@ def upload_file():
             return jsonify({'error': 'File type not allowed'}), 400
             
         if not is_blob_storage_configured():
-            return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
-            
-        # Generate a unique filename
+            return jsonify({'error': 'Azure Blob Storage not available'}), 503
+        
+        # Sanitize and create unique filename
+        safe_filename = sanitize_filename(file.filename)
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        unique_filename = f"{timestamp}_{file.filename}"
+        unique_filename = f"{timestamp}_{safe_filename}"
         
-        # Upload file to Azure Blob Storage
+        # Get content type or default to octet-stream
+        content_type = file.content_type or 'application/octet-stream'
+        
+        # Create blob client and set content settings
         blob_client = container_client.get_blob_client(unique_filename)
+        
+        # Read file data
         file_contents = file.read()
-        blob_client.upload_blob(file_contents, overwrite=True)
         
-        # Get the URL of the uploaded file
-        file_url = f"{blob_client.url}"
+        # Set content settings including content type
+        from azure.storage.blob import ContentSettings
+        content_settings = ContentSettings(
+            content_type=content_type,
+            cache_control="max-age=86400"  # Cache for 24 hours
+        )
         
-        logger.info(f"File uploaded successfully: {unique_filename}")
+        # Upload to Azure with proper content settings
+        blob_client.upload_blob(
+            file_contents, 
+            overwrite=True,
+            content_settings=content_settings
+        )
+        
+        # Generate secure URL with expiration
+        secure_url = get_secure_file_url(unique_filename)
+        
+        logger.info(f"File uploaded successfully: {unique_filename} ({len(file_contents)} bytes)")
         
         return jsonify({
             'message': 'File uploaded successfully',
             'filename': unique_filename,
-            'url': file_url
+            'size': len(file_contents),
+            'content_type': content_type,
+            'url': blob_client.url,  # Base URL (requires storage permissions)
+            'secure_url': secure_url,  # SAS URL with temporary access
+            'uploaded_at': datetime.now().isoformat()
         })
         
     except Exception as e:
@@ -279,18 +339,25 @@ def upload_file():
 def list_files():
     try:
         if not is_blob_storage_configured():
-            return jsonify({'error': 'Azure Blob Storage not configured properly'}), 500
+            return jsonify({'error': 'Azure Blob Storage not available'}), 503
+        
+        # Get optional prefix filter
+        prefix = request.args.get('prefix', None)
             
-        # List all blobs in the container
-        blobs = container_client.list_blobs()
+        # List blobs with optional prefix filter
+        blobs = container_client.list_blobs(name_starts_with=prefix)
         files = []
         
         for blob in blobs:
-            blob_client = container_client.get_blob_client(blob.name)
+            # Generate secure URL with expiration
+            secure_url = get_secure_file_url(blob.name)
+            
+            # Add file info to response
             files.append({
                 'name': blob.name,
-                'url': blob_client.url,
+                'url': secure_url,  # Only return secure URLs
                 'size': blob.size,
+                'content_type': blob.content_settings.content_type if blob.content_settings else None,
                 'created': blob.creation_time.isoformat() if blob.creation_time else None,
                 'last_modified': blob.last_modified.isoformat() if blob.last_modified else None
             })
@@ -304,28 +371,66 @@ def list_files():
         logger.error(f"Error in list_files endpoint: {str(e)}")
         return jsonify({'error': 'An error occurred while listing files.'}), 500
 
-@app.route('/api/health', methods=['GET'])
-def health_check():
-    status = {
-        'status': 'ok',
-        'timestamp': datetime.now().isoformat(),
-        'services': {
-            'openai': 'connected' if openai.api_key else 'not configured',
-            'azure_storage': 'connected' if is_blob_storage_configured() else 'not configured'
-        }
-    }
-    return jsonify(status)
+@app.route('/api/files/<path:filename>', methods=['GET'])
+def download_file(filename):
+    try:
+        if not is_blob_storage_configured():
+            return jsonify({'error': 'Azure Blob Storage not available'}), 503
+        
+        # Sanitize filename
+        safe_filename = sanitize_filename(filename)
+        
+        try:
+            # Get blob client
+            blob_client = container_client.get_blob_client(safe_filename)
+            
+            # Download the blob
+            download_stream = blob_client.download_blob()
+            
+            # Get content and content type
+            content = download_stream.readall()
+            content_type = download_stream.properties.content_settings.content_type
+            
+            # Return file as response
+            return Response(
+                content,
+                mimetype=content_type,
+                headers={
+                    "Content-Disposition": f"attachment; filename={os.path.basename(safe_filename)}"
+                }
+            )
+            
+        except ResourceNotFoundError:
+            return jsonify({'error': 'File not found'}), 404
+        
+    except Exception as e:
+        logger.error(f"Error in download_file endpoint: {str(e)}")
+        return jsonify({'error': 'An error occurred while downloading the file.'}), 500
 
-# Serve React frontend
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, 'index.html')
-
-# Run the application
-if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=os.getenv('FLASK_DEBUG', 'False') == 'True')
+@app.route('/api/files/<path:filename>', methods=['DELETE'])
+def delete_file(filename):
+    try:
+        if not is_blob_storage_configured():
+            return jsonify({'error': 'Azure Blob Storage not available'}), 503
+        
+        # Sanitize filename
+        safe_filename = sanitize_filename(filename)
+        
+        try:
+            # Get blob client and delete the blob
+            blob_client = container_client.get_blob_client(safe_filename)
+            blob_client.delete_blob()
+            
+            logger.info(f"File deleted successfully: {safe_filename}")
+            
+            return jsonify({
+                'message': 'File deleted successfully',
+                'filename': safe_filename
+            })
+            
+        except ResourceNotFoundError:
+            return jsonify({'error': 'File not found'}), 404
+        
+    except Exception as e:
+        logger.error(f"Error in delete_file endpoint: {str(e)}")
+        return jsonify({'error': 'An error occurred while deleting the file.'}), 500
