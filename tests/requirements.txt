@@ -1,0 +1,13 @@
+# Testing framework
+pytest==7.4.2
+pytest-cov==4.1.0
+pytest-flask==1.2.0
+pytest-mock==3.11.1
+
+# Mocking
+responses==0.23.3
+httpx==0.24.1
+
+# Assertion helpers
+assertpy==1.1
+freezegun==1.2.2  # For time-based tests
