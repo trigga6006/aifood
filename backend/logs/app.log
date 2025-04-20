@@ -91,3 +91,24 @@ Response headers:
     'x-ms-version': 'REDACTED'
     'Date': 'Sun, 20 Apr 2025 01:49:59 GMT'
 2025-04-19 21:50:00,498 - __main__ - INFO - [main.py:197] - Successfully connected to Azure Blob Storage container: aifood-files
+2025-04-20 00:05:03,083 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-20 00:05:03,135 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.25.1 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'a2c41f5c-1d9c-11f0-8e57-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-20 00:05:03,351 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '46f23083-501e-0032-5da9-b1d2d8000000'
+    'x-ms-client-request-id': 'a2c41f5c-1d9c-11f0-8e57-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'Date': 'Sun, 20 Apr 2025 04:05:02 GMT'
+2025-04-20 00:05:03,352 - __main__ - INFO - [main.py:197] - Successfully connected to Azure Blob Storage container: aifood-files
