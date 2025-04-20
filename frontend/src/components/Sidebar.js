@@ -1,31 +1,50 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ activeItem, onItemClick }) => {
   // Organize menu items by category
   const managementItems = [
-    { id: 'dashboard', icon: '📊', label: 'Dashboard' },
-    { id: 'menu', icon: '🍽️', label: 'Menu Management' },
-    { id: 'hours', icon: '📅', label: 'Hours & Operations' },
-    { id: 'orders', icon: '🛒', label: 'Orders' },
-    { id: 'customers', icon: '👥', label: 'Customers' }
+    { id: 'dashboard', icon: '📊', label: 'Dashboard', path: '/' },
+    { id: 'menu', icon: '🍽️', label: 'Menu Management', path: '/menu' },
+    { id: 'hours', icon: '📅', label: 'Hours & Operations', path: '/hours' },
+    { id: 'orders', icon: '🛒', label: 'Orders', path: '/orders' },
+    { id: 'customers', icon: '👥', label: 'Customers', path: '/customers' }
   ];
   
   const configItems = [
-    { id: 'settings', icon: '⚙️', label: 'Settings' },
-    { id: 'integrations', icon: '🔄', label: 'Integrations' },
-    { id: 'ai-assistant', icon: '🤖', label: 'AI Assistant' }
+    { id: 'settings', icon: '⚙️', label: 'Settings', path: '/settings' },
+    { id: 'integrations', icon: '🔄', label: 'Integrations', path: '/integrations' },
+    { id: 'ai-assistant', icon: '🤖', label: 'AI Assistant', path: '/ai-assistant' },
+    { id: 'chatbot-demo', icon: '💬', label: 'Chatbot Demo', path: '/chatbot-demo' } // Added new item
   ];
   
   const analyticsItems = [
-    { id: 'analytics', icon: '📈', label: 'Reports' },
-    { id: 'feedback', icon: '💬', label: 'Feedback' }
+    { id: 'analytics', icon: '📈', label: 'Reports', path: '/analytics' },
+    { id: 'feedback', icon: '💬', label: 'Feedback', path: '/feedback' }
   ];
   
   const supportItems = [
-    { id: 'faqs', icon: '❓', label: 'Help Center' },
-    { id: 'contact', icon: '📞', label: 'Contact' }
+    { id: 'faqs', icon: '❓', label: 'Help Center', path: '/faqs' },
+    { id: 'contact', icon: '📞', label: 'Contact', path: '/contact' }
   ];
+
+  // Helper function to render menu items
+  const renderMenuItems = (items) => {
+    return items.map((item) => (
+      <li key={item.id}>
+        <Link to={item.path}>
+          <div
+            className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
+            onClick={() => onItemClick(item.id)}
+          >
+            <span className="menu-icon">{item.icon}</span>
+            <span className="menu-text">{item.label}</span>
+          </div>
+        </Link>
+      </li>
+    ));
+  };
 
   return (
     <aside className="sidebar">
@@ -37,62 +56,22 @@ const Sidebar = ({ activeItem, onItemClick }) => {
       <nav className="sidebar-menu">
         <div className="menu-title">Management</div>
         <ul className="menu-list">
-          {managementItems.map((item) => (
-            <li key={item.id}>
-              <div
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => onItemClick(item.id)}
-              >
-                <span className="menu-icon">{item.icon}</span>
-                <span className="menu-text">{item.label}</span>
-              </div>
-            </li>
-          ))}
+          {renderMenuItems(managementItems)}
         </ul>
         
         <div className="menu-title">Configuration</div>
         <ul className="menu-list">
-          {configItems.map((item) => (
-            <li key={item.id}>
-              <div
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => onItemClick(item.id)}
-              >
-                <span className="menu-icon">{item.icon}</span>
-                <span className="menu-text">{item.label}</span>
-              </div>
-            </li>
-          ))}
+          {renderMenuItems(configItems)}
         </ul>
         
         <div className="menu-title">Analytics</div>
         <ul className="menu-list">
-          {analyticsItems.map((item) => (
-            <li key={item.id}>
-              <div
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => onItemClick(item.id)}
-              >
-                <span className="menu-icon">{item.icon}</span>
-                <span className="menu-text">{item.label}</span>
-              </div>
-            </li>
-          ))}
+          {renderMenuItems(analyticsItems)}
         </ul>
         
         <div className="menu-title">Support</div>
         <ul className="menu-list">
-          {supportItems.map((item) => (
-            <li key={item.id}>
-              <div
-                className={`menu-item ${activeItem === item.id ? 'active' : ''}`}
-                onClick={() => onItemClick(item.id)}
-              >
-                <span className="menu-icon">{item.icon}</span>
-                <span className="menu-text">{item.label}</span>
-              </div>
-            </li>
-          ))}
+          {renderMenuItems(supportItems)}
         </ul>
       </nav>
     </aside>

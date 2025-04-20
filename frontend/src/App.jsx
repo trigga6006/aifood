@@ -1,21 +1,23 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
-
-// React Router v7 uses a different approach than v6
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Dashboard />} />
-  )
-);
+import ChatbotDemo from './pages/ChatbotDemo';
 
 function App() {
   return (
-    <div style={{ display: 'flex' }}>
-      <Sidebar />
-      <RouterProvider router={router} />
-    </div>
+    <Router>
+      <div style={{ display: 'flex' }}>
+        <Sidebar />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/chatbot-demo" element={<ChatbotDemo />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
