@@ -8,28 +8,61 @@ const ChatWidget = ({ restaurantId, theme = 'light' }) => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! How can I help you with your reservation or questions about our restaurant?", sender: 'bot' }
   ]);
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSendMessage = (text) => {
+  const handleSendMessage = async (text) => {
     if (!text.trim()) return;
     
     // Add user message
     const newUserMessage = { id: messages.length + 1, text, sender: 'user' };
     setMessages([...messages, newUserMessage]);
     
-    // Simulate bot response (this will be replaced with your actual API call)
-    setTimeout(() => {
+    // Set loading state
+    setIsLoading(true);
+    
+    try {
+      // Make API call to your backend
+      const response = await fetch('http://localhost:5000/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: text,
+          restaurantId: restaurantId || 'demo-restaurant'
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      const data = await response.json();
+      
+      // Add bot response
       const botResponse = { 
         id: messages.length + 2, 
-        text: "Thanks for your message. I'm a placeholder response. Soon I'll be connected to an AI that can help with reservations and answer questions about the restaurant.", 
+        text: data.message, 
         sender: 'bot' 
       };
       setMessages(prev => [...prev, botResponse]);
-    }, 1000);
+    } catch (error) {
+      console.error('Error:', error);
+      // Add error message
+      const errorResponse = { 
+        id: messages.length + 2, 
+        text: "Sorry, I'm having trouble connecting to the server. Please try again later.", 
+        sender: 'bot' 
+      };
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Auto-scroll to bottom of messages
@@ -53,6 +86,15 @@ const ChatWidget = ({ restaurantId, theme = 'light' }) => {
             {messages.map(message => (
               <ChatMessage key={message.id} message={message} />
             ))}
+            {isLoading && (
+              <div className="chat-message bot">
+                <div className="message-content typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
           <ChatInput onSendMessage={handleSendMessage} />
