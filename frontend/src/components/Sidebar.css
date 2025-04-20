@@ -1,0 +1,113 @@
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-color);
+    padding: 2rem 0;
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .sidebar-header {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .logo span {
+    color: var(--accent-color);
+  }
+  
+  .restaurant-name {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+  
+  .sidebar-menu {
+    padding: 1.5rem 0;
+  }
+  
+  .menu-title {
+    padding: 0 1.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  
+  .menu-list {
+    list-style: none;
+  }
+  
+  .menu-item {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    border-left: 3px solid transparent;
+  }
+  
+  .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--primary-color);
+  }
+  
+  .menu-item.active {
+    background-color: rgba(192, 57, 43, 0.1);
+    border-left: 3px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+  
+  .menu-icon {
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+  }
+  
+  @media (max-width: 991px) {
+    .sidebar {
+      width: 70px;
+      padding: 1.5rem 0;
+    }
+    
+    .sidebar-header {
+      padding: 0 0.5rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .logo span, .restaurant-name {
+      display: none;
+    }
+    
+    .menu-title, .menu-text {
+      display: none;
+    }
+    
+    .menu-item {
+      padding: 0.8rem;
+      justify-content: center;
+    }
+    
+    .menu-icon {
+      margin-right: 0;
+      font-size: 1.2rem;
+    }
+  }
