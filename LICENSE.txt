@@ -1,0 +1,12 @@
+Copyright (c) 2025 Ben Fowler
+
+All rights reserved.
+
+This software and its source code are the proprietary property of Ben Fowler.
+
+Unauthorized copying, modification, distribution, use, or reverse engineering of any part of this repository, via any medium, is strictly prohibited. The contents are confidential and intended solely for the use of Ben Fowler and its authorized collaborators.
+
+This repository is not licensed for public use. No license is granted, explicitly or implicitly, under any intellectual property rights.
+
+For inquiries, contact: fowlerben71@gmail.com
+
