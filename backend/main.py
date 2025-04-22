@@ -166,7 +166,139 @@ def handle_api_error(error):
     return response
 
 # Configure OpenAI
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = openai_api_key
+
+# Flag for using mock responses (set to True to avoid OpenAI API costs)
+USE_MOCK_RESPONSES = True
+
+# ChatGPT Service Class - Embedded in main.py to avoid import issues
+class ChatGPTService:
+    def __init__(self, api_key: str = None):
+        """Initialize the ChatGPT service with API key."""
+        self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
+        if not self.api_key:
+            raise ValueError("OpenAI API key is required. Either pass it explicitly or set OPENAI_API_KEY environment variable.")
+        
+        # Set the API key for the older openai library
+        openai.api_key = self.api_key
+        
+    def get_completion(self, 
+                       messages, 
+                       model="gpt-3.5-turbo",
+                       temperature=0.7,
+                       max_tokens=1000):
+        """
+        Get a completion from the ChatGPT model.
+        
+        Args:
+            messages: List of message dictionaries with 'role' and 'content' keys
+            model: The OpenAI model to use
+            temperature: Controls randomness (0-1)
+            max_tokens: Maximum number of tokens to generate
+            
+        Returns:
+            The response from the API
+        """
+        # Use mock response if flag is set
+        if USE_MOCK_RESPONSES:
+            return self.get_mock_completion(messages)
+            
+        try:
+            # Using the older style API
+            response = openai.ChatCompletion.create(
+                model=model,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens
+            )
+            
+            return {
+                "message": response.choices[0].message.content,
+                "finish_reason": response.choices[0].finish_reason,
+                "usage": {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens
+                }
+            }
+        except Exception as e:
+            # Log the error and return a failure response
+            logger.error(f"Error calling OpenAI API: {e}")
+            return {
+                "error": str(e),
+                "message": None,
+                "finish_reason": "error",
+                "usage": None
+            }
+    
+    def get_simple_completion(self, prompt, **kwargs):
+        """
+        Simplified method to get just the completion text from a single prompt.
+        
+        Args:
+            prompt: The user's prompt text
+            **kwargs: Additional parameters to pass to get_completion
+            
+        Returns:
+            Just the completion text string
+        """
+        # Use mock response if flag is set
+        if USE_MOCK_RESPONSES:
+            return "This is a mock response for testing. The integration is working correctly!"
+            
+        messages = [{"role": "user", "content": prompt}]
+        response = self.get_completion(messages, **kwargs)
+        
+        if "error" in response and response["error"]:
+            raise Exception(f"Failed to get completion: {response['error']}")
+            
+        return response["message"]
+        
+    def get_mock_completion(self, messages):
+        """Return a mock response for testing without hitting the API"""
+        # Generate a contextual response based on the user's input
+        user_message = ""
+        for msg in messages:
+            if msg["role"] == "user":
+                user_message = msg["content"]
+                break
+                
+        # Simple keyword-based response generation
+        response_text = "I'm a mock AI assistant. "
+        
+        if "hello" in user_message.lower() or "hi" in user_message.lower():
+            response_text += "Hello! How can I help you today?"
+        elif "how are you" in user_message.lower():
+            response_text += "I'm just a mock response, but thanks for asking!"
+        elif "food" in user_message.lower() or "recipe" in user_message.lower() or "cook" in user_message.lower():
+            response_text += "I'd be happy to discuss food and recipes with you. What kind of cuisine are you interested in?"
+        elif "weather" in user_message.lower():
+            response_text += "I don't have access to real-time weather data in mock mode, but I can pretend it's a lovely day!"
+        elif "thank" in user_message.lower():
+            response_text += "You're welcome! Is there anything else I can help with?"
+        else:
+            response_text += "I understand you're asking about: '" + user_message[:30] + "...' This is a mock response for testing purposes."
+            
+        return {
+            "message": response_text,
+            "finish_reason": "stop",
+            "usage": {
+                "prompt_tokens": len(user_message.split()),
+                "completion_tokens": len(response_text.split()),
+                "total_tokens": len(user_message.split()) + len(response_text.split())
+            }
+        }
+
+# Initialize the ChatGPT service
+try:
+    chatgpt_service = ChatGPTService(api_key=openai_api_key)
+    logger.info("ChatGPT service initialized successfully")
+    if USE_MOCK_RESPONSES:
+        logger.info("Using MOCK responses for ChatGPT API (to avoid API costs)")
+except Exception as e:
+    chatgpt_service = None
+    logger.error(f"Failed to initialize ChatGPT service: {str(e)}")
 
 # Configure Azure Blob Storage
 azure_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
@@ -270,6 +402,117 @@ def sanitize_filename(filename):
     # Replace potentially dangerous characters
     filename = re.sub(r'[^a-zA-Z0-9_.-]', '_', filename)
     return filename
+
+# Add a root endpoint for API info
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        'message': 'Welcome to the ChatGPT API server',
+        'endpoints': {
+            'chat': '/api/chat',
+            'test': '/api/chat/test'
+        },
+        'mock_mode': USE_MOCK_RESPONSES
+    })
+
+# New API endpoint for ChatGPT interaction
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    try:
+        # Validate request data
+        if not request.is_json:
+            return jsonify({'error': 'Request must be JSON'}), 400
+            
+        data = request.get_json()
+        
+        if 'message' not in data:
+            return jsonify({'error': 'No message provided'}), 400
+            
+        # Check if ChatGPT service is available
+        if chatgpt_service is None:
+            return jsonify({'error': 'ChatGPT service not available'}), 503
+        
+        # Extract parameters
+        message = data.get('message')
+        chat_history = data.get('chat_history', [])
+        model = data.get('model', 'gpt-3.5-turbo')
+        temperature = data.get('temperature', 0.7)
+        max_tokens = data.get('max_tokens', 1000)
+        
+        # Format messages for ChatGPT API
+        messages = []
+        
+        # Add chat history
+        for msg in chat_history:
+            role = "assistant" if msg.get('is_bot', False) else "user"
+            messages.append({
+                "role": role,
+                "content": msg.get('text', '')
+            })
+        
+        # Add the current message
+        messages.append({
+            "role": "user",
+            "content": message
+        })
+        
+        # Get response from ChatGPT
+        logger.info(f"Sending chat request with {len(messages)} messages")
+        
+        # Using mock or real API based on the flag
+        response = chatgpt_service.get_completion(
+            messages=messages,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
+        
+        # Check for errors
+        if "error" in response and response["error"]:
+            logger.error(f"ChatGPT API error: {response['error']}")
+            return jsonify({
+                'error': 'Error from ChatGPT API',
+                'details': response['error']
+            }), 500
+        
+        # Return response
+        return jsonify({
+            'response': response["message"],
+            'usage': response["usage"],
+            'finish_reason': response["finish_reason"]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        return jsonify({'error': 'An error occurred while processing chat request.'}), 500
+
+# Add a simple test endpoint for checking if ChatGPT is working
+@app.route('/api/chat/test', methods=['GET'])
+def test_chat():
+    try:
+        # Check if ChatGPT service is available
+        if chatgpt_service is None:
+            return jsonify({'error': 'ChatGPT service not available'}), 503
+        
+        # Use mock response for test endpoint
+        test_response = "This is a test response. The integration is working correctly!"
+        if not USE_MOCK_RESPONSES:
+            test_response = chatgpt_service.get_simple_completion("Say 'Hello, I am working correctly!'")
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'ChatGPT API test successful',
+            'response': test_response,
+            'mock_mode': USE_MOCK_RESPONSES
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in chat test endpoint: {str(e)}")
+        logger.error(f"Exception traceback: {traceback.format_exc()}")
+        return jsonify({
+            'status': 'error',
+            'message': f'ChatGPT API test failed: {str(e)}'
+        }), 500
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
@@ -434,3 +677,7 @@ def delete_file(filename):
     except Exception as e:
         logger.error(f"Error in delete_file endpoint: {str(e)}")
         return jsonify({'error': 'An error occurred while deleting the file.'}), 500
+
+# Run the application on port 5000
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
