@@ -20,7 +20,15 @@ export const sendMessage = async (message, restaurantId) => {
       throw new Error('Network response was not ok');
     }
     
-    return await response.json();
+    const data = await response.json();
+    
+    // Handle the updated response format
+    return {
+      message: data.message || "Sorry, I couldn't process your request.",
+      error: false,
+      usage: data.usage,
+      finish_reason: data.finish_reason
+    };
   } catch (error) {
     console.error('Error sending message:', error);
     return {

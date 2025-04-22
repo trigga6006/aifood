@@ -170,7 +170,7 @@ openai_api_key = os.getenv('OPENAI_API_KEY')
 openai.api_key = openai_api_key
 
 # Flag for using mock responses (set to True to avoid OpenAI API costs)
-USE_MOCK_RESPONSES = True
+USE_MOCK_RESPONSES = False  # Change to False when ready for production
 
 # ChatGPT Service Class - Embedded in main.py to avoid import issues
 class ChatGPTService:
@@ -410,7 +410,8 @@ def index():
         'message': 'Welcome to the ChatGPT API server',
         'endpoints': {
             'chat': '/api/chat',
-            'test': '/api/chat/test'
+            'test': '/api/chat/test',
+            'restaurant': '/api/restaurant/:restaurantId'
         },
         'mock_mode': USE_MOCK_RESPONSES
     })
@@ -435,12 +436,33 @@ def chat():
         # Extract parameters
         message = data.get('message')
         chat_history = data.get('chat_history', [])
+        restaurant_id = data.get('restaurantId')  # Added restaurant ID parameter
         model = data.get('model', 'gpt-3.5-turbo')
         temperature = data.get('temperature', 0.7)
         max_tokens = data.get('max_tokens', 1000)
         
+        # If restaurant_id is provided, get restaurant info
+        restaurant_info = None
+        if restaurant_id:
+            restaurant_info = get_restaurant_info(restaurant_id)
+            
         # Format messages for ChatGPT API
         messages = []
+        
+        # Add restaurant context if available
+        if restaurant_info:
+            system_message = f"You are a helpful assistant for {restaurant_info.get('name', 'this restaurant')}. "
+            if 'description' in restaurant_info:
+                system_message += restaurant_info['description'] + " "
+            if 'hours' in restaurant_info:
+                system_message += f"Hours: {restaurant_info['hours']} "
+            if 'menu' in restaurant_info:
+                system_message += f"Menu: {restaurant_info['menu']} "
+                
+            messages.append({
+                "role": "system",
+                "content": system_message
+            })
         
         # Add chat history
         for msg in chat_history:
@@ -477,7 +499,7 @@ def chat():
         
         # Return response
         return jsonify({
-            'response': response["message"],
+            'message': response["message"],  # Changed from 'response' to 'message' to match frontend
             'usage': response["usage"],
             'finish_reason': response["finish_reason"]
         })
@@ -513,6 +535,76 @@ def test_chat():
             'status': 'error',
             'message': f'ChatGPT API test failed: {str(e)}'
         }), 500
+
+# New endpoint for getting restaurant information
+@app.route('/api/restaurant/<restaurant_id>', methods=['GET'])
+def get_restaurant_endpoint(restaurant_id):
+    try:
+        restaurant_info = get_restaurant_info(restaurant_id)
+        if restaurant_info:
+            return jsonify(restaurant_info)
+        else:
+            return jsonify({'error': 'Restaurant not found'}), 404
+    except Exception as e:
+        logger.error(f"Error getting restaurant info: {str(e)}")
+        return jsonify({'error': 'An error occurred while fetching restaurant information.'}), 500
+
+# Helper function to get restaurant information
+def get_restaurant_info(restaurant_id):
+    """Get restaurant information from storage or database."""
+    try:
+        # For testing, return mock data
+        if USE_MOCK_RESPONSES or not is_blob_storage_configured():
+            # Mock restaurant data for testing
+            mock_restaurants = {
+                "restaurant123": {
+                    "id": "restaurant123",
+                    "name": "Delicious Bites",
+                    "description": "A family-friendly restaurant serving American and Italian cuisine.",
+                    "hours": "Mon-Fri: 11am-10pm, Sat-Sun: 10am-11pm",
+                    "address": "123 Main St, Anytown, USA",
+                    "phone": "(555) 123-4567",
+                    "email": "info@deliciousbites.example",
+                    "menu": "Appetizers: Mozzarella Sticks, Garlic Bread, Calamari. Entrees: Spaghetti, Pizza, Burgers, Steak. Desserts: Tiramisu, Cheesecake.",
+                    "specials": "Monday: Half-price pasta, Tuesday: Kids eat free, Wednesday: Wine Wednesday",
+                    "created_at": datetime.now().isoformat(),
+                    "updated_at": datetime.now().isoformat()
+                },
+                "restaurant456": {
+                    "id": "restaurant456",
+                    "name": "Sushi Haven",
+                    "description": "Authentic Japanese sushi restaurant with fresh, daily-sourced fish.",
+                    "hours": "Tue-Sun: 12pm-2:30pm, 5pm-10pm, Closed on Mondays",
+                    "address": "456 Oak St, Anytown, USA",
+                    "phone": "(555) 456-7890",
+                    "email": "info@sushihaven.example",
+                    "menu": "Appetizers: Miso Soup, Edamame, Gyoza. Sushi Rolls: California Roll, Spicy Tuna, Dragon Roll. Sashimi: Salmon, Tuna, Yellowtail.",
+                    "specials": "Thursday: All-you-can-eat sushi, Sunday: Chef's special omakase menu",
+                    "created_at": datetime.now().isoformat(),
+                    "updated_at": datetime.now().isoformat()
+                }
+            }
+            
+            return mock_restaurants.get(restaurant_id)
+        
+        # In production, retrieve from Azure blob storage
+        # This is just a placeholder for the actual implementation
+        blob_name = f"restaurants/{restaurant_id}.json"
+        try:
+            blob_client = container_client.get_blob_client(blob_name)
+            restaurant_data = blob_client.download_blob().readall()
+            import json
+            return json.loads(restaurant_data)
+        except ResourceNotFoundError:
+            logger.warning(f"Restaurant {restaurant_id} not found in blob storage")
+            return None
+        except Exception as e:
+            logger.error(f"Error getting restaurant from blob storage: {str(e)}")
+            return None
+            
+    except Exception as e:
+        logger.error(f"Error in get_restaurant_info: {str(e)}")
+        return None
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
