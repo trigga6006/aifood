@@ -12,3 +12,12 @@ sphinx-rtd-theme==1.3.0
 
 # Environment management
 python-dotenv==1.0.0
+
+# Packages forgot to add will organize later
+Flask==3.1.0
+flask-cors==5.0.1
+azure-storage-blob==12.25.1
+openai==1.75.0
+Werkzeug==3.1.3  
+azure-core==1.33.0  
+requests==2.32.3  

@@ -686,3 +686,117 @@ RequestId:59f0db6a-a01e-006b-2cdc-b3555b000000
 Time:2025-04-22T23:14:30.6114262Z</Message></Error>
 2025-04-22 19:14:32,077 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
 2025-04-22 19:14:32,962 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [22/Apr/2025 19:14:32] "POST /api/chat HTTP/1.1" 200 -
+2025-04-22 19:56:58,204 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-22 19:56:58,205 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-22 19:56:58,233 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '79e99351-1fd5-11f0-9977-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-22 19:56:58,685 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '83464737-201e-0017-73e2-b37ba4000000'
+    'x-ms-client-request-id': '79e99351-1fd5-11f0-9977-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'Date': 'Tue, 22 Apr 2025 23:56:56 GMT'
+2025-04-22 19:56:58,687 - __main__ - INFO - [main.py:329] - Successfully connected to Azure Blob Storage container: aifood-files
+2025-04-22 19:56:58,698 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-04-22 19:56:58,698 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-04-22 19:56:58,699 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-04-22 19:56:59,168 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-22 19:56:59,169 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-22 19:56:59,196 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '7a7c7950-1fd5-11f0-a66b-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-22 19:56:59,503 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ab37991d-101e-0023-78e2-b3486c000000'
+    'x-ms-client-request-id': '7a7c7950-1fd5-11f0-a66b-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'Date': 'Tue, 22 Apr 2025 23:56:57 GMT'
+2025-04-22 19:56:59,505 - __main__ - INFO - [main.py:329] - Successfully connected to Azure Blob Storage container: aifood-files
+2025-04-22 19:56:59,511 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-04-22 19:56:59,513 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-04-22 19:57:29,623 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [22/Apr/2025 19:57:29] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-22 19:57:29,886 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files/restaurants/demo-restaurant.json'
+Request method: 'GET'
+Request headers:
+    'x-ms-range': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '8cc766e1-1fd5-11f0-a0eb-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-22 19:57:29,920 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 404
+Response headers:
+    'Content-Length': '215'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ab38116c-101e-0023-25e2-b3486c000000'
+    'x-ms-client-request-id': '8cc766e1-1fd5-11f0-a0eb-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'BlobNotFound'
+    'Date': 'Tue, 22 Apr 2025 23:57:28 GMT'
+2025-04-22 19:57:29,921 - __main__ - ERROR - [main.py:602] - Error getting restaurant from blob storage: The specified blob does not exist.
+RequestId:ab38116c-101e-0023-25e2-b3486c000000
+Time:2025-04-22T23:57:28.3771703Z
+ErrorCode:BlobNotFound
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
+RequestId:ab38116c-101e-0023-25e2-b3486c000000
+Time:2025-04-22T23:57:28.3771703Z</Message></Error>
+2025-04-22 19:57:29,921 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-22 19:57:31,079 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [22/Apr/2025 19:57:31] "POST /api/chat HTTP/1.1" 200 -
+2025-04-22 19:57:36,099 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [22/Apr/2025 19:57:36] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-22 19:57:36,412 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files/restaurants/demo-restaurant.json'
+Request method: 'GET'
+Request headers:
+    'x-ms-range': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '90ab3613-1fd5-11f0-b5a1-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-22 19:57:36,442 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 404
+Response headers:
+    'Content-Length': '215'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ab382747-101e-0023-3be2-b3486c000000'
+    'x-ms-client-request-id': '90ab3613-1fd5-11f0-b5a1-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'BlobNotFound'
+    'Date': 'Tue, 22 Apr 2025 23:57:34 GMT'
+2025-04-22 19:57:36,442 - __main__ - ERROR - [main.py:602] - Error getting restaurant from blob storage: The specified blob does not exist.
+RequestId:ab382747-101e-0023-3be2-b3486c000000
+Time:2025-04-22T23:57:34.8993146Z
+ErrorCode:BlobNotFound
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
+RequestId:ab382747-101e-0023-3be2-b3486c000000
+Time:2025-04-22T23:57:34.8993146Z</Message></Error>
+2025-04-22 19:57:36,442 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-22 19:57:37,296 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [22/Apr/2025 19:57:37] "POST /api/chat HTTP/1.1" 200 -
