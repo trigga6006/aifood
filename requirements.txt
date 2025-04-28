@@ -24,7 +24,18 @@ requests==2.32.3
 
 #database packages
 
-Flask-SQLAlchemy>=3.0.0
-Flask-Migrate>=4.1.0
-SQLAlchemy>=2.0.40
-alembic>=1.10.0
+#Flask-SQLAlchemy>=3.0.0
+#Flask-Migrate>=4.1.0
+#SQLAlchemy>=2.0.40
+#alembic>=1.10.0
+
+#database new req2.0
+fastapi==0.110.0
+uvicorn==0.29.0
+pydantic==2.7.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.27
+alembic==1.13.1
+python-jose==3.3.0
+passlib==1.7.4
+python-multipart==0.0.9
