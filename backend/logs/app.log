@@ -852,3 +852,554 @@ Response headers:
 2025-04-27 22:11:29,363 - __main__ - INFO - [main.py:329] - Successfully connected to Azure Blob Storage container: aifood-files
 2025-04-27 22:11:29,374 - werkzeug - WARNING - [_internal.py:97] -  * Debugger is active!
 2025-04-27 22:11:29,376 - werkzeug - INFO - [_internal.py:97] -  * Debugger PIN: 125-868-656
+2025-04-28 00:46:54,550 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-28 00:46:54,551 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-28 00:46:54,580 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'cf023042-23eb-11f0-9dc8-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-28 00:46:54,999 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '35239a30-501e-008b-18f8-b7d6c2000000'
+    'x-ms-client-request-id': 'cf023042-23eb-11f0-9dc8-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'Date': 'Mon, 28 Apr 2025 04:46:54 GMT'
+2025-04-28 00:46:55,000 - __main__ - INFO - [main.py:329] - Successfully connected to Azure Blob Storage container: aifood-files
+2025-04-28 00:46:55,012 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-04-28 00:46:55,013 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-04-28 00:46:55,014 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-04-28 00:46:55,471 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-28 00:46:55,472 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-28 00:46:55,500 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'cf8e96ec-23eb-11f0-9e66-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-28 00:46:55,836 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '6038bf08-d01e-0071-04f8-b73484000000'
+    'x-ms-client-request-id': 'cf8e96ec-23eb-11f0-9e66-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'Date': 'Mon, 28 Apr 2025 04:46:54 GMT'
+2025-04-28 00:46:55,838 - __main__ - INFO - [main.py:329] - Successfully connected to Azure Blob Storage container: aifood-files
+2025-04-28 00:46:55,845 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-04-28 00:46:55,847 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-04-28 00:47:32,284 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [28/Apr/2025 00:47:32] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-28 00:47:32,546 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files/restaurants/demo-restaurant.json'
+Request method: 'GET'
+Request headers:
+    'x-ms-range': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'e5a36335-23eb-11f0-a167-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-28 00:47:32,576 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 404
+Response headers:
+    'Content-Length': '215'
+    'Content-Type': 'application/xml'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '60391e45-d01e-0071-7df8-b73484000000'
+    'x-ms-client-request-id': 'e5a36335-23eb-11f0-a167-60cf84c6f41a'
+    'x-ms-version': 'REDACTED'
+    'x-ms-error-code': 'BlobNotFound'
+    'Date': 'Mon, 28 Apr 2025 04:47:31 GMT'
+2025-04-28 00:47:32,577 - __main__ - ERROR - [main.py:602] - Error getting restaurant from blob storage: The specified blob does not exist.
+RequestId:60391e45-d01e-0071-7df8-b73484000000
+Time:2025-04-28T04:47:32.3087145Z
+ErrorCode:BlobNotFound
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
+RequestId:60391e45-d01e-0071-7df8-b73484000000
+Time:2025-04-28T04:47:32.3087145Z</Message></Error>
+2025-04-28 00:47:32,577 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-28 00:47:34,054 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [28/Apr/2025 00:47:34] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:22:54,141 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-30 22:22:54,142 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-30 22:22:54,165 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '3028d6c1-2633-11f0-a76d-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-30 22:22:54,593 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '215e13c7-b01e-0048-1b3f-bacf98000000'
+    'x-ms-client-request-id': '3028d6c1-2633-11f0-a76d-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Thu, 01 May 2025 02:22:53 GMT'
+2025-04-30 22:22:54,594 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:215e13c7-b01e-0048-1b3f-bacf98000000
+Time:2025-05-01T02:22:53.4402877Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:215e13c7-b01e-0048-1b3f-bacf98000000
+Time:2025-05-01T02:22:53.4402877Z</Message></Error>
+2025-04-30 22:22:54,607 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-04-30 22:22:54,607 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-04-30 22:22:54,609 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-04-30 22:22:55,004 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-04-30 22:22:55,005 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-04-30 22:22:55,026 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '30ac3cb6-2633-11f0-931e-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-04-30 22:22:55,392 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '60c1065e-201e-0081-2a3f-ba7275000000'
+    'x-ms-client-request-id': '30ac3cb6-2633-11f0-931e-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Thu, 01 May 2025 02:22:53 GMT'
+2025-04-30 22:22:55,393 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:60c1065e-201e-0081-2a3f-ba7275000000
+Time:2025-05-01T02:22:54.2440216Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:60c1065e-201e-0081-2a3f-ba7275000000
+Time:2025-05-01T02:22:54.2440216Z</Message></Error>
+2025-04-30 22:22:55,400 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-04-30 22:22:55,402 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-04-30 22:23:37,790 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:23:37] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:23:38,048 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:23:39,512 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:23:39] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:23:49,070 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:23:49] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:23:49,383 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:23:50,414 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:23:50] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:24:10,981 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:24:10] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:24:11,289 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:24:12,289 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:24:12] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:24:28,633 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:24:28] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:24:28,939 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:24:30,706 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:24:30] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:27:23,615 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:27:23] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:27:23,878 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:27:25,050 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:27:25] "POST /api/chat HTTP/1.1" 200 -
+2025-04-30 22:40:48,974 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:40:48] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-04-30 22:40:49,235 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-04-30 22:40:50,217 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [30/Apr/2025 22:40:50] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 20:37:21,329 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 20:37:21,330 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 20:37:21,363 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '9beda4b9-26ed-11f0-a5c0-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 20:37:21,766 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ad19d095-b01e-003a-3ffa-bac8d7000000'
+    'x-ms-client-request-id': '9beda4b9-26ed-11f0-a5c0-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 00:37:21 GMT'
+2025-05-01 20:37:21,768 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:ad19d095-b01e-003a-3ffa-bac8d7000000
+Time:2025-05-02T00:37:21.6032450Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:ad19d095-b01e-003a-3ffa-bac8d7000000
+Time:2025-05-02T00:37:21.6032450Z</Message></Error>
+2025-05-01 20:37:21,782 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-05-01 20:37:21,782 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-05-01 20:37:21,784 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 20:37:22,239 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 20:37:22,240 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 20:37:22,267 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '9c779e64-26ed-11f0-ad53-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 20:37:22,595 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '569f44c4-501e-0050-2afa-ba10ff000000'
+    'x-ms-client-request-id': '9c779e64-26ed-11f0-ad53-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 00:37:22 GMT'
+2025-05-01 20:37:22,597 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:569f44c4-501e-0050-2afa-ba10ff000000
+Time:2025-05-02T00:37:22.4395303Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:569f44c4-501e-0050-2afa-ba10ff000000
+Time:2025-05-02T00:37:22.4395303Z</Message></Error>
+2025-05-01 20:37:22,605 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 20:37:22,607 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 21:31:40,573 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:31:40,574 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:31:40,615 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '3297f9f1-26f5-11f0-9871-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:31:41,051 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '13a24b58-a01e-0036-1c01-bb5fdf000000'
+    'x-ms-client-request-id': '3297f9f1-26f5-11f0-9871-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:31:40 GMT'
+2025-05-01 21:31:41,052 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:13a24b58-a01e-0036-1c01-bb5fdf000000
+Time:2025-05-02T01:31:40.8095317Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:13a24b58-a01e-0036-1c01-bb5fdf000000
+Time:2025-05-02T01:31:40.8095317Z</Message></Error>
+2025-05-01 21:31:41,064 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-05-01 21:31:41,064 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-05-01 21:31:41,065 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 21:31:41,526 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:31:41,527 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:31:41,556 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '33278e5d-26f5-11f0-bc60-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:31:41,903 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '5b65efab-001e-0062-3a01-bb1088000000'
+    'x-ms-client-request-id': '33278e5d-26f5-11f0-bc60-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:31:40 GMT'
+2025-05-01 21:31:41,905 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:5b65efab-001e-0062-3a01-bb1088000000
+Time:2025-05-02T01:31:41.6546968Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:5b65efab-001e-0062-3a01-bb1088000000
+Time:2025-05-02T01:31:41.6546968Z</Message></Error>
+2025-05-01 21:31:41,913 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 21:31:41,915 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 21:49:52,987 - werkzeug - INFO - [_internal.py:187] -  * Detected change in 'C:\\Users\\fowle\\Documents\\dev\\aifood\\backend\\test_api.py', reloading
+2025-05-01 21:49:53,043 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 21:49:53,557 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:49:53,558 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:49:53,590 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'be0eb69b-26f7-11f0-b545-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:49:54,019 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'e5111908-a01e-0019-2104-bb5214000000'
+    'x-ms-client-request-id': 'be0eb69b-26f7-11f0-b545-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:49:52 GMT'
+2025-05-01 21:49:54,020 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:e5111908-a01e-0019-2104-bb5214000000
+Time:2025-05-02T01:49:53.7476767Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:e5111908-a01e-0019-2104-bb5214000000
+Time:2025-05-02T01:49:53.7476767Z</Message></Error>
+2025-05-01 21:49:54,029 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 21:49:54,031 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 21:49:58,069 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:49:58,069 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:49:58,099 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'c0beda8b-26f7-11f0-beef-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:49:58,510 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '902a0ec1-801e-0031-5004-bb33bc000000'
+    'x-ms-client-request-id': 'c0beda8b-26f7-11f0-beef-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:49:57 GMT'
+2025-05-01 21:49:58,511 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:902a0ec1-801e-0031-5004-bb33bc000000
+Time:2025-05-02T01:49:58.2418587Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:902a0ec1-801e-0031-5004-bb33bc000000
+Time:2025-05-02T01:49:58.2418587Z</Message></Error>
+2025-05-01 21:49:58,522 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-05-01 21:49:58,523 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-05-01 21:49:58,524 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 21:49:58,990 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:49:58,991 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:49:59,018 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'c14b11cd-26f7-11f0-a8be-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:49:59,364 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '4e506223-d01e-0013-5504-bbf6a3000000'
+    'x-ms-client-request-id': 'c14b11cd-26f7-11f0-a8be-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:49:59 GMT'
+2025-05-01 21:49:59,366 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:4e506223-d01e-0013-5504-bbf6a3000000
+Time:2025-05-02T01:49:59.0887103Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:4e506223-d01e-0013-5504-bbf6a3000000
+Time:2025-05-02T01:49:59.0887103Z</Message></Error>
+2025-05-01 21:49:59,374 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 21:49:59,376 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 21:56:31,873 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:56:31,874 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:56:31,903 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'ab787c0d-26f8-11f0-9795-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:56:32,342 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '792919ad-b01e-0077-3505-bb073b000000'
+    'x-ms-client-request-id': 'ab787c0d-26f8-11f0-9795-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:56:31 GMT'
+2025-05-01 21:56:32,344 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:792919ad-b01e-0077-3505-bb073b000000
+Time:2025-05-02T01:56:32.0561583Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:792919ad-b01e-0077-3505-bb073b000000
+Time:2025-05-02T01:56:32.0561583Z</Message></Error>
+2025-05-01 21:56:32,356 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-05-01 21:56:32,356 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-05-01 21:56:32,357 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 21:56:32,816 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 21:56:32,817 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 21:56:32,854 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'ac09af09-26f8-11f0-a9bd-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 21:56:33,179 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'a3006d9f-501e-0022-5905-bb17b0000000'
+    'x-ms-client-request-id': 'ac09af09-26f8-11f0-a9bd-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 01:56:32 GMT'
+2025-05-01 21:56:33,181 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:a3006d9f-501e-0022-5905-bb17b0000000
+Time:2025-05-02T01:56:32.9005149Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:a3006d9f-501e-0022-5905-bb17b0000000
+Time:2025-05-02T01:56:32.9005149Z</Message></Error>
+2025-05-01 21:56:33,189 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 21:56:33,191 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 21:57:00,251 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 21:57:00] "[33mGET /api/restaurant/1 HTTP/1.1[0m" 404 -
+2025-05-01 21:57:05,496 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 21:57:05] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 21:57:05,808 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 21:57:07,363 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 21:57:07] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 21:57:21,134 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 21:57:21] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 21:57:21,438 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 21:57:25,914 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 21:57:25] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 22:00:45,766 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:00:45] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 22:00:46,029 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 22:00:46,970 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:00:46] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 22:00:52,707 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:00:52] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 22:00:53,012 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 22:00:54,463 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:00:54] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 22:01:04,877 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:01:04] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 22:01:05,183 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 22:01:06,153 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:01:06] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 22:01:25,888 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:01:25] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 22:01:26,198 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 22:01:27,055 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 22:01:27] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 22:58:49,503 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 22:58:49,503 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 22:58:49,531 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '5f454e4c-2701-11f0-bde6-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 22:58:49,975 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'f04c2d7c-701e-001a-590e-bbb370000000'
+    'x-ms-client-request-id': '5f454e4c-2701-11f0-bde6-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 02:58:48 GMT'
+2025-05-01 22:58:49,976 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:f04c2d7c-701e-001a-590e-bbb370000000
+Time:2025-05-02T02:58:49.5806816Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:f04c2d7c-701e-001a-590e-bbb370000000
+Time:2025-05-02T02:58:49.5806816Z</Message></Error>
+2025-05-01 22:58:49,987 - werkzeug - INFO - [_internal.py:187] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.20:5000
+2025-05-01 22:58:49,987 - werkzeug - INFO - [_internal.py:187] - [33mPress CTRL+C to quit[0m
+2025-05-01 22:58:49,988 - werkzeug - INFO - [_internal.py:187] -  * Restarting with stat
+2025-05-01 22:58:50,429 - __main__ - INFO - [main.py:66] - Application starting up...
+2025-05-01 22:58:50,430 - __main__ - INFO - [main.py:296] - ChatGPT service initialized successfully
+2025-05-01 22:58:50,461 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:511] - Request URL: 'https://nomicloudoi.blob.core.windows.net/aifood-files?restype=REDACTED&comp=REDACTED'
+Request method: 'GET'
+Request headers:
+    'x-ms-version': 'REDACTED'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.17.0 Python/3.13.3 (Windows-11-10.0.26100-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '5fd32c06-2701-11f0-945f-60cf84c6f41a'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2025-05-01 22:58:50,806 - azure.core.pipeline.policies.http_logging_policy - INFO - [_universal.py:547] - Response status: 403
+Response headers:
+    'Content-Length': '246'
+    'Content-Type': 'application/xml'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '3f37dfac-101e-000c-4e0e-bb45a7000000'
+    'x-ms-client-request-id': '5fd32c06-2701-11f0-945f-60cf84c6f41a'
+    'x-ms-error-code': 'AuthorizationFailure'
+    'Date': 'Fri, 02 May 2025 02:58:49 GMT'
+2025-05-01 22:58:50,807 - __main__ - ERROR - [main.py:345] - Failed to connect to Azure Blob Storage: This request is not authorized to perform this operation.
+RequestId:3f37dfac-101e-000c-4e0e-bb45a7000000
+Time:2025-05-02T02:58:50.4251470Z
+ErrorCode:AuthorizationFailure
+Content: <?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationFailure</Code><Message>This request is not authorized to perform this operation.
+RequestId:3f37dfac-101e-000c-4e0e-bb45a7000000
+Time:2025-05-02T02:58:50.4251470Z</Message></Error>
+2025-05-01 22:58:50,815 - werkzeug - WARNING - [_internal.py:187] -  * Debugger is active!
+2025-05-01 22:58:50,817 - werkzeug - INFO - [_internal.py:187] -  * Debugger PIN: 490-383-048
+2025-05-01 23:21:09,450 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:21:09] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 23:21:09,713 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 23:21:10,377 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:21:10] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 23:26:01,086 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:26:01] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 23:26:01,333 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 23:26:02,194 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:26:02] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 23:28:41,990 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:28:41] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 23:28:42,253 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 23:28:43,042 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:28:43] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 23:29:34,800 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:29:34] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 23:29:35,110 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 23:29:35,808 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:29:35] "POST /api/chat HTTP/1.1" 200 -
+2025-05-01 23:32:43,975 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:32:43] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-05-01 23:32:44,237 - __main__ - INFO - [main.py:482] - Sending chat request with 1 messages
+2025-05-01 23:32:44,937 - werkzeug - INFO - [_internal.py:187] - 127.0.0.1 - - [01/May/2025 23:32:44] "POST /api/chat HTTP/1.1" 200 -
